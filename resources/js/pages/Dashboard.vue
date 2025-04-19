@@ -3,6 +3,14 @@ import AppLayout from '@/layouts/AppLayout.vue';
 import { type BreadcrumbItem } from '@/types';
 import { Head } from '@inertiajs/vue3';
 import EmployeeRegister from './replacables/EmployeeRegister.vue';
+import { provide } from 'vue';
+
+const pageVariables = defineProps({
+    empoleyees: Object,
+});
+
+provide('employees', pageVariables.empoleyees);
+
 const breadcrumbs: BreadcrumbItem[] = [
     {
         title: 'Dashboard',

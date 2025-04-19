@@ -33,7 +33,7 @@ createInertiaApp({
             .use(PrimeVue, {
                 theme: {
                     preset: Aura,
-                }
+                },
             })
             .use(ZiggyVue)
             .use(i18n)
