@@ -1,5 +1,33 @@
 {
-    "welcome": "Welcome",
-    "logout": "Logout",
-    "profile": "Profile"
+    "general": {
+        "loading": "Loading...",
+        "error": "An error occurred. Please try again.",
+        "success": "Success!",
+        "cancel": "Cancel",
+        "confirm": "Confirm",
+        "yes": "Yes",
+        "no": "No",
+        "ok": "OK",
+        "close": "Close",
+        "save": "Save",
+        "delete": "Delete",
+        "edit": "Edit",
+        "add": "Add",
+        "view": "View",
+        "search": "Search",
+        "filter": "Filter"
+    },
+    "employee_register": {
+        "title": "Employee Registration",
+        "name": "Name",
+        "email": "Email",
+        "phone": "Phone",
+        "address": "Address",
+        "department": "Department",
+        "position": "Position",
+        "salary": "Salary",
+        "join_date": "Join Date",
+        "submit": "Submit",
+        "reset": "Reset"
+    }
 }

@@ -7,7 +7,7 @@ import { ZiggyVue } from 'ziggy-js';
 import { initializeTheme } from './composables/useAppearance';
 import PrimeVue from 'primevue/config';
 import Aura from '@primeuix/themes/aura';
-import { i18n } from "./i18n";
+import { i18n } from './i18n';
 
 // Extend ImportMeta interface for Vite...
 declare module 'vite/client' {

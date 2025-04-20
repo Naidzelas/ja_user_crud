@@ -3,6 +3,8 @@ import { Button } from 'primevue';
 import { ref } from 'vue';
 import EmployeeCreate from './component/EmployeeCreate.vue';
 import EmployeeTable from './component/EmployeeTable.vue';
+import { useI18n } from 'vue-i18n'; // Import useI18n
+const { t } = useI18n();
 
 const visible = ref(false);
 </script>
@@ -10,6 +12,7 @@ const visible = ref(false);
 <template>
     <div class="justify-items-center gap-4 grid grid-col-3 mt-30">
         <section class="col-span-3 mt-10 px-30 w-full">
+            <div>{{ t('general.ok') }}</div>
             <Button label="New employee" severity="contrast" @click="visible = true"></Button>
             <EmployeeCreate :toggle="visible" @update:toggle="visible = $event" />
             <EmployeeTable />
