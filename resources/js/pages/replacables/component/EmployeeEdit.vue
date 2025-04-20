@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { router, usePage } from '@inertiajs/vue3';
-import { Button, DatePicker, Dialog, InputGroup, InputGroupAddon, InputMask } from 'primevue';
+import { rand } from '@vueuse/core';
+import { Button, DatePicker, Dialog, Image, InputGroup, InputGroupAddon, InputMask } from 'primevue';
 import { computed, reactive, ref, watch } from 'vue';
 
 const pageVariables = defineProps({
@@ -31,14 +32,18 @@ watch(
 watch(
     () => pageVariables.employee,
     (newVal) => {
-        Object.assign(form, newVal); 
+        Object.assign(form, newVal);
     },
-    { immediate: true }
+    { immediate: true },
 );
 
-watch(form, (newVal) => {
-    emit('update:employee', newVal);
-}, { deep: true });
+watch(
+    form,
+    (newVal) => {
+        emit('update:employee', newVal);
+    },
+    { deep: true },
+);
 
 watch(editVisible, (newVal) => {
     emit('update:edit', newVal);
@@ -54,12 +59,28 @@ function createEmployee() {
 }
 </script>
 
+<!-- TODO fix profile image preview mask to rounded -->
 <template>
     <form class="flex">
         <Dialog v-model:visible="editVisible" modal class="w-[40em]">
             <template #header>
                 <div class="flex flex-col gap-4">
-                    <h2 class="font-bold text-2xl">{{ employee?.first_name }} {{ employee?.last_name }}</h2>
+                    <div class="flex">
+                        <Image
+                            src="/images/random_person.png"
+                            alt="Employee Image"
+                            class="mr-4 rounded-full"
+                            preview
+                        >
+                            <template #previewicon>
+                                <i class="rounded-full pi pi-eye"></i>
+                            </template>
+                            <template #image>
+                                <img src="/images/random_person.png" alt="Employee Image" class="rounded-full w-12 h-12" />
+                            </template>
+                        </Image>
+                        <h2 class="font-bold text-3xl">{{ employee?.first_name }} {{ employee?.last_name }}</h2>
+                    </div>
                     <p class="text-gray-600">Update employee information.</p>
                 </div>
             </template>

@@ -23,11 +23,8 @@ function editEmployee(employee: any): void {
 };
 
 function terminateEmployee(employee: any): void {
-        // Call the API to terminate the employee
-        selectedEmployee.value = { ...employee }; 
-        confirmation.value = true;
-        // router.delete(route('employee.destroy', employee.id), { onSuccess: () => router.visit(route('employee.index')) });
-    
+    selectedEmployee.value = { ...employee }; 
+    confirmation.value = true;
 };
 
 </script>
@@ -39,6 +36,8 @@ function terminateEmployee(employee: any): void {
         removableSort
         class="w-full"
         :globalFilterFields="['first_name', 'last_name', 'role', 'phone', 'email']"
+        stripedRows
+        paginator :rows="5" :rowsPerPageOptions="[5, 10, 20, 50]"
     >
         <template #header>
             <div class="flex flex-wrap justify-between items-center gap-2">
