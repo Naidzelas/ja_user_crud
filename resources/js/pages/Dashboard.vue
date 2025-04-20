@@ -6,10 +6,10 @@ import EmployeeRegister from './replacables/EmployeeRegister.vue';
 import { provide } from 'vue';
 
 const pageVariables = defineProps({
-    empoleyees: Object,
+    employees: Object,
 });
 
-provide('employees', pageVariables.empoleyees);
+provide('employees', pageVariables.employees);
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
