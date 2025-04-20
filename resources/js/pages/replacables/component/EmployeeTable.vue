@@ -69,7 +69,7 @@ function terminateEmployee(employee: any): void {
         </Column>
         <Column field="role" :header="t('employee_register.role')" filterField="role" sortable class="w-[15%]">
             <template #body="{ data }">
-                <span class="font-bold">{{ data.role }}</span>
+                <span class="font-bold">{{ data.role.name }}</span>
             </template>
             <template #filter="{ filterModel }">
                 <InputText v-model="filterModel.value" type="text" placeholder="Search by name" />

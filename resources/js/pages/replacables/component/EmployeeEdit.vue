@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { router, usePage } from '@inertiajs/vue3';
-import { Button, DatePicker, Dialog, Image, InputGroup, InputGroupAddon, InputMask } from 'primevue';
-import { computed, reactive, ref, watch } from 'vue';
+import { Button, DatePicker, Dialog, Image, InputGroup, InputGroupAddon, InputMask, Select } from 'primevue';
+import { computed, reactive, ref, watch, inject } from 'vue';
 import { useI18n } from 'vue-i18n';
 const pageVariables = defineProps({
     edit: Boolean,
@@ -13,10 +13,12 @@ const emit = defineEmits(['update:edit', 'update:employee']);
 const editVisible = ref(pageVariables.edit);
 const page = usePage();
 const er = computed(() => page.props.errors);
+let roles:any = inject('roles');
 
 let form = reactive({
     first_name: pageVariables.employee?.first_name,
     last_name: pageVariables.employee?.last_name,
+    role: pageVariables.employee?.role,
     phone: pageVariables.employee?.phone,
     email: pageVariables.employee?.email,
     birth_date: pageVariables.employee?.birth_date,
@@ -87,6 +89,10 @@ function createEmployee() {
                 <label for="last_name">{{ t('employee_register.last_name') }}</label>
                 <input type="text" v-model="form.last_name" id="last_name" class="p-2 border border-gray-300 rounded" />
                 <p v-if="er.last_name" class="-mt-3 font-bold text-red-600 text-sm">{{ er.last_name }}</p>
+
+                <label for="role">{{ t('employee_register.role') }}</label>
+                <Select id="role" v-model="form.role" :options="roles" optionLabel="name" :placeholder="t('employee_register.select_role')" class="w-full" />
+                <p v-if="er.role" class="-mt-3 font-bold text-red-600 text-sm">{{ er.role }}</p>
 
                 <label for="email">{{ t('employee_register.email') }}</label>
                 <input type="email" v-model="form.email" id="email" class="p-2 border border-gray-300 rounded" />

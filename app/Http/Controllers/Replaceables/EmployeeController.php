@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Replaceables;
 
 use App\Http\Controllers\Controller;
 use App\Models\Replacables\Employee;
+use App\Models\Replacables\Role;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -12,23 +13,23 @@ class EmployeeController extends Controller
 {
     public function index()
     {
-        $employees = Employee::whereRaw('deleted_at is null')->get();
+        $employees = Employee::whereRaw('deleted_at is null')->with('role')->get();
 
-        return Inertia::render('Dashboard',[
+        return Inertia::render('Dashboard', [
             'employees' => $employees ?? [],
+            'roles' => Role::select('id', 'name')->get(),
         ]);
     }
 
     public function store(Request $request)
     {
-     
         $request->validate([
             'first_name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:employees',
             'phone' => 'required|string|max:255',
             'birth_date' => 'required|date',
-            // 'role_id' => 'integer|exists:roles,id',
+            'role_id' => 'array',
         ]);
 
         Employee::firstOrCreate(
@@ -38,10 +39,13 @@ class EmployeeController extends Controller
                 'email' => $request->email,
                 'phone' => $request->phone,
                 'employed_at' => Carbon::now('Europe/Vilnius'),
-                'birth_date' => Carbon::parse($request->birth_date, 'UTC')->setTimezone('Europe/Vilnius')->format('Y-m-d'),
-                // 'role_id' => $request->role_id,
+                'birth_date' => Carbon::parse($request->birth_date, 'UTC')
+                    ->setTimezone('Europe/Vilnius')
+                    ->format('Y-m-d'),
+                'role_id' => $request->role_id->id,
             ]
         );
+
         return to_route('employee.index');
     }
 
@@ -53,6 +57,7 @@ class EmployeeController extends Controller
             'email' => 'required|string|email|max:255|unique:employees,email,' . $request->id,
             'phone' => 'required|string|max:255',
             'birth_date' => 'required|date',
+            'role_id' => 'array',
         ]);
 
         Employee::where('id', $employeeId)->update([
@@ -60,7 +65,10 @@ class EmployeeController extends Controller
             'last_name' => $request->last_name,
             'email' => $request->email,
             'phone' => $request->phone,
-            'birth_date' => Carbon::parse($request->birth_date, 'UTC')->setTimezone('Europe/Vilnius')->format('Y-m-d'),
+            'birth_date' => Carbon::parse($request->birth_date, 'UTC')
+                ->setTimezone('Europe/Vilnius')
+                ->format('Y-m-d'),
+            'role_id' => $request->role_id->id,
         ]);
 
         return to_route('employee.index');

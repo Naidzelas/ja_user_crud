@@ -28,6 +28,7 @@
         "last_name": "Last Name",
         "terminate": "Terminate",
         "role": "Role",
+        "select_role": "Select Role",
         "phone": "Phone number",
         "email": "Email",
         "birth_date": "Birth Date",

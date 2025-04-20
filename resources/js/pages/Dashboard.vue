@@ -7,9 +7,11 @@ import { provide } from 'vue';
 
 const pageVariables = defineProps({
     employees: Object,
+    roles: Object,
 });
 
 provide('employees', pageVariables.employees);
+provide('roles', pageVariables.roles);
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
