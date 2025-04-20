@@ -12,8 +12,7 @@ const visible = ref(false);
 <template>
     <div class="justify-items-center gap-4 grid grid-col-3 mt-30">
         <section class="col-span-3 mt-10 px-30 w-full">
-            <div>{{ t('general.ok') }}</div>
-            <Button label="New employee" severity="contrast" @click="visible = true"></Button>
+            <Button :label="t('employee_register.new_employee')" severity="contrast" @click="visible = true"></Button>
             <EmployeeCreate :toggle="visible" @update:toggle="visible = $event" />
             <EmployeeTable />
         </section>

@@ -1,5 +1,37 @@
 {
-    "welcome": "Sveiki atvykę",
-    "logout": "Atsijungti",
-    "profile": "Profilis"
+    "general": {
+        "loading": "Įkeliama...",
+        "error": "Įvyko klaida. Bandykite dar kartą.",
+        "success": "Pavyko!",
+        "cancel": "Atšaukti",
+        "confirm": "Patvirtinti",
+        "yes": "Taip",
+        "no": "Ne",
+        "ok": "Gerai",
+        "close": "Uždaryti",
+        "save": "Išsaugoti",
+        "delete": "Ištrinti",
+        "edit": "Redaguoti",
+        "add": "Pridėti",
+        "view": "Peržiūrėti",
+        "search": "Ieškoti...",
+        "filter": "Filtruoti"
+    },
+    "employee_register": {
+        "no_empoyee_found": "Darbuotojų nerasta",
+        "create_new_employee": "Sukurti naują darbuotoją.",
+        "terminate_question": "Ar tikrai norite nutraukti ",
+        "manage_employees": "Tvarkyti darbuotojus",
+        "loading_empoyee_data": "Įkeliami darbuotojų duomenys. Prašome palaukti.",
+        "first_name": "Vardas",
+        "employment": "Darbo santykiai",
+        "last_name": "Pavardė",
+        "terminate": "Nutraukti",
+        "role": "Pareigos",
+        "phone": "Telefono numeris",
+        "email": "El. paštas",
+        "birth_date": "Gimimo data",
+        "new_employee": "Naujas darbuotojas",
+        "update_employee_information": "Atnaujinti darbuotojo informaciją."
+    }
 }

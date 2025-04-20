@@ -1,14 +1,14 @@
 <script setup lang="ts">
 import { router, usePage } from '@inertiajs/vue3';
-import { rand } from '@vueuse/core';
 import { Button, DatePicker, Dialog, Image, InputGroup, InputGroupAddon, InputMask } from 'primevue';
 import { computed, reactive, ref, watch } from 'vue';
-
+import { useI18n } from 'vue-i18n';
 const pageVariables = defineProps({
     edit: Boolean,
     employee: Object,
 });
 
+const { t } = useI18n();
 const emit = defineEmits(['update:edit', 'update:employee']);
 const editVisible = ref(pageVariables.edit);
 const page = usePage();
@@ -66,12 +66,7 @@ function createEmployee() {
             <template #header>
                 <div class="flex flex-col gap-4">
                     <div class="flex">
-                        <Image
-                            src="/images/random_person.png"
-                            alt="Employee Image"
-                            class="mr-4 rounded-full"
-                            preview
-                        >
+                        <Image src="/images/random_person.png" alt="Employee Image" class="mr-4 rounded-full" preview>
                             <template #previewicon>
                                 <i class="rounded-full pi pi-eye"></i>
                             </template>
@@ -81,30 +76,30 @@ function createEmployee() {
                         </Image>
                         <h2 class="font-bold text-3xl">{{ employee?.first_name }} {{ employee?.last_name }}</h2>
                     </div>
-                    <p class="text-gray-600">Update employee information.</p>
+                    <p class="text-gray-600">{{ t('employee_register.update_employee_information') }}</p>
                 </div>
             </template>
             <div class="flex flex-col gap-4">
-                <label for="first_name">First name</label>
+                <label for="first_name">{{ t('employee_register.first_name') }}</label>
                 <input type="text" v-model="form.first_name" id="first_name" class="p-2 border border-gray-300 rounded" />
                 <p v-if="er.first_name" class="-mt-3 font-bold text-red-600 text-sm">{{ er.first_name }}</p>
 
-                <label for="last_name">Last name</label>
+                <label for="last_name">{{ t('employee_register.last_name') }}</label>
                 <input type="text" v-model="form.last_name" id="last_name" class="p-2 border border-gray-300 rounded" />
                 <p v-if="er.last_name" class="-mt-3 font-bold text-red-600 text-sm">{{ er.last_name }}</p>
 
-                <label for="email">Email</label>
+                <label for="email">{{ t('employee_register.email') }}</label>
                 <input type="email" v-model="form.email" id="email" class="p-2 border border-gray-300 rounded" />
                 <p v-if="er.email" class="-mt-3 font-bold text-red-600 text-sm">{{ er.email }}</p>
 
-                <label for="phone">Phone Number</label>
+                <label for="phone">{{ t('employee_register.phone') }}</label>
                 <InputGroup id="phone">
                     <InputGroupAddon>+370</InputGroupAddon>
                     <InputMask v-model="form.phone" placeholder="000 00000" mask="999 99999" />
                 </InputGroup>
                 <p v-if="er.phone" class="-mt-3 font-bold text-red-600 text-sm">{{ er.phone }}</p>
 
-                <label for="birth_date">Birth Date</label>
+                <label for="birth_date">{{ t('employee_register.birth_date') }}</label>
                 <DatePicker
                     id="birth_date"
                     v-model="form.birth_date"
@@ -118,8 +113,8 @@ function createEmployee() {
             </div>
             <template #footer>
                 <div class="flex justify-between">
-                    <Button label="Save" severity="contrast" @click="createEmployee" autofocus />
-                    <Button label="Cancel" outlined text severity="secondary" @click="editVisible = false" autofocus />
+                    <Button :label="t('general.save')" severity="contrast" @click="createEmployee" autofocus />
+                    <Button :label="t('general.cancel')" outlined text severity="secondary" @click="editVisible = false" autofocus />
                 </div>
             </template>
         </Dialog>

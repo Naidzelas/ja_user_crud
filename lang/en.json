@@ -14,20 +14,24 @@
         "edit": "Edit",
         "add": "Add",
         "view": "View",
-        "search": "Search",
+        "search": "Search...",
         "filter": "Filter"
     },
     "employee_register": {
-        "title": "Employee Registration",
-        "name": "Name",
+        "no_empoyee_found": "No employee found",
+        "create_new_employee": "Create New Employee.",
+        "terminate_question": "Are you sure you want to terminate ",
+        "manage_employees": "Manage Employees",
+        "loading_empoyee_data": "Loading employee data. Please wait.",
+        "first_name": "First Name",
+        "employment": "Employment",
+        "last_name": "Last Name",
+        "terminate": "Terminate",
+        "role": "Role",
+        "phone": "Phone number",
         "email": "Email",
-        "phone": "Phone",
-        "address": "Address",
-        "department": "Department",
-        "position": "Position",
-        "salary": "Salary",
-        "join_date": "Join Date",
-        "submit": "Submit",
-        "reset": "Reset"
+        "birth_date": "Birth Date",
+        "new_employee": "New Employee",
+        "update_employee_information": "Update Employee Information."
     }
 }
