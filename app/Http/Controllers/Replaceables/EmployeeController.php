@@ -12,7 +12,7 @@ class EmployeeController extends Controller
 {
     public function index()
     {
-        $employees = Employee::query()->get();
+        $employees = Employee::whereRaw('deleted_at is null')->get();
 
         return Inertia::render('Dashboard',[
             'employees' => $employees ?? [],
@@ -37,10 +37,43 @@ class EmployeeController extends Controller
                 'last_name' => $request->last_name,
                 'email' => $request->email,
                 'phone' => $request->phone,
+                'employed_at' => Carbon::now('Europe/Vilnius'),
                 'birth_date' => Carbon::parse($request->birth_date, 'UTC')->setTimezone('Europe/Vilnius')->format('Y-m-d'),
                 // 'role_id' => $request->role_id,
             ]
         );
+        return to_route('employee.index');
+    }
+
+    public function update(Request $request, $employeeId)
+    {
+        $request->validate([
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:employees,email,' . $request->id,
+            'phone' => 'required|string|max:255',
+            'birth_date' => 'required|date',
+        ]);
+
+        Employee::where('id', $employeeId)->update([
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'birth_date' => Carbon::parse($request->birth_date, 'UTC')->setTimezone('Europe/Vilnius')->format('Y-m-d'),
+        ]);
+
+        return to_route('employee.index');
+    }
+
+    public function destroy($employeeId)
+    {
+        Employee::where('id', $employeeId)->update([
+            'terminated_at' => Carbon::now('Europe/Vilnius')->format('Y-m-d H:i:s'),
+        ]);
+
+        Employee::where('id', $employeeId)->delete();
+
         return to_route('employee.index');
     }
 }

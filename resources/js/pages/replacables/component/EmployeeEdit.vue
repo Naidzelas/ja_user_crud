@@ -1,10 +1,66 @@
+<script setup lang="ts">
+import { router, usePage } from '@inertiajs/vue3';
+import { Button, DatePicker, Dialog, InputGroup, InputGroupAddon, InputMask } from 'primevue';
+import { computed, reactive, ref, watch } from 'vue';
+
+const pageVariables = defineProps({
+    edit: Boolean,
+    employee: Object,
+});
+
+const emit = defineEmits(['update:edit', 'update:employee']);
+const editVisible = ref(pageVariables.edit);
+const page = usePage();
+const er = computed(() => page.props.errors);
+
+let form = reactive({
+    first_name: pageVariables.employee?.first_name,
+    last_name: pageVariables.employee?.last_name,
+    phone: pageVariables.employee?.phone,
+    email: pageVariables.employee?.email,
+    birth_date: pageVariables.employee?.birth_date,
+});
+
+watch(
+    () => pageVariables.edit,
+    (newVal) => {
+        editVisible.value = newVal;
+    },
+);
+
+watch(
+    () => pageVariables.employee,
+    (newVal) => {
+        Object.assign(form, newVal); 
+    },
+    { immediate: true }
+);
+
+watch(form, (newVal) => {
+    emit('update:employee', newVal);
+}, { deep: true });
+
+watch(editVisible, (newVal) => {
+    emit('update:edit', newVal);
+});
+
+function createEmployee() {
+    router.patch(route('employee.update', pageVariables.employee?.id), form, {
+        onSuccess: () => {
+            editVisible.value = false;
+            router.visit(route('employee.index'));
+        },
+    });
+}
+</script>
+
 <template>
     <form class="flex">
         <Dialog v-model:visible="editVisible" modal class="w-[40em]">
             <template #header>
                 <div class="flex flex-col gap-4">
-                    <h2 class="font-bold text-2xl">test</h2>
-                    <p class="text-gray-600">Create a new employee.</p>
+                    <h2 class="font-bold text-2xl">{{ employee?.first_name }} {{ employee?.last_name }}</h2>
+                    <p class="text-gray-600">Update employee information.</p>
                 </div>
             </template>
             <div class="flex flex-col gap-4">
@@ -48,46 +104,3 @@
         </Dialog>
     </form>
 </template>
-
-<script setup lang="ts">
-import { router, usePage } from '@inertiajs/vue3';
-import { Button, DatePicker, Dialog, InputGroup, InputGroupAddon, InputMask } from 'primevue';
-import { computed, reactive, ref, watch } from 'vue';
-
-const pageVariables = defineProps({
-    edit: Boolean,
-    employee: Object,
-});
-
-const emit = defineEmits(['update:edit']);
-const editVisible = ref(pageVariables.edit);
-const page = usePage();
-const er = computed(() => page.props.errors);
-
-const form = reactive({
-    first_name: null,
-    last_name: null,
-    phone: '',
-    email: null,
-    birth_date: null,
-});
-
-watch(
-    () => pageVariables.edit,
-    (newVal) => {
-        editVisible.value = newVal;
-    },
-);
-
-watch(editVisible, (newVal) => {
-    emit('update:edit', newVal);
-});
-
-function createEmployee() {
-    router.post(route('employee.store'), form, {
-        onSuccess: () => {
-            editVisible.value = false;
-        },
-    });
-}
-</script>

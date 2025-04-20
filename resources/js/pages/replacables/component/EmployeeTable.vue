@@ -1,25 +1,38 @@
 <script setup lang="ts">
 import { FilterMatchMode, FilterOperator } from '@primevue/core/api';
-import { Column, DataTable, InputText, Button } from 'primevue';
+import { Column, DataTable, InputText, Button, useToast, useConfirm } from 'primevue';
 import { inject, ref } from 'vue';
+import { router } from '@inertiajs/vue3';
 import EmployeeEdit from './EmployeeEdit.vue';
+import Confirmation from './Confirmation.vue';
 
+// Define props for the component
 const employees:any = inject('employees');
 const editVisible = ref(false);
+const confirmation = ref(false);
 const selectedEmployee = ref(undefined);
 const filters = ref({
     global: { value: null, matchMode: FilterMatchMode.CONTAINS },
     name: { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.STARTS_WITH }] },
 });
 
+// Methods
 function editEmployee(employee: any): void {
     selectedEmployee.value = { ...employee }; 
     editVisible.value = true;
 };
+
+function terminateEmployee(employee: any): void {
+        // Call the API to terminate the employee
+        selectedEmployee.value = { ...employee }; 
+        confirmation.value = true;
+        // router.delete(route('employee.destroy', employee.id), { onSuccess: () => router.visit(route('employee.index')) });
+    
+};
+
 </script>
 
 <template>
-    {{ employees }}
     <DataTable
         :value="employees"
         v-model:filters="filters"
@@ -64,7 +77,7 @@ function editEmployee(employee: any): void {
         </Column>
         <Column field="phone" header="Phone" filterField="phone" sortable class="w-[15%]">
             <template #body="{ data }">
-                <span class="font-bold">{{ data.phone }}</span>
+                <span class="font-bold">{{ '+370 ' + data.phone }}</span>
             </template>
             <template #filter="{ filterModel }">
                 <InputText v-model="filterModel.value" type="text" placeholder="Search by name" />
@@ -90,9 +103,21 @@ function editEmployee(employee: any): void {
             <template #body="{ data }">
                 <div class="flex gap-2">
                     <Button icon="pi pi-pencil" outlined rounded class="mr-2" @click="editEmployee(data)" />
+                    <Button icon="pi pi-trash" severity="danger" outlined rounded class="mr-2" @click="terminateEmployee(data)" />
                 </div>
             </template>
         </Column>
     </DataTable>
-    <EmployeeEdit :employee="selectedEmployee" :edit="editVisible" @update:edit="editVisible = $event" />
+    <EmployeeEdit 
+        :employee="selectedEmployee" 
+        :edit="editVisible" 
+        @update:edit="editVisible = $event" 
+        @update:employee="selectedEmployee = $event" 
+    />
+    <Confirmation 
+        :confirmation="confirmation" 
+        :employee="selectedEmployee"
+        @update:employee="selectedEmployee = $event"
+        @update:confirmation="confirmation = $event" 
+    />
 </template>

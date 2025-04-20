@@ -18,9 +18,10 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('phone')->nullable();
             $table->integer('role_id')->default(0);
-            $table->string('birth_date')->nullable();
+            $table->date('birth_date')->nullable();
             $table->datetime('employed_at')->nullable();
             $table->datetime('terminated_at')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }
