@@ -33,5 +33,20 @@
         "birth_date": "Birth Date",
         "new_employee": "New Employee",
         "update_employee_information": "Update Employee Information."
+    },
+    "login": {
+        "login": "Log in",
+        "sign_up": "Sign up",
+        "username": "Username",
+        "email_address": "Email address",
+        "password": "Password",
+        "remember_me": "Remember Me",
+        "forgot_password": "Forgot Password?",
+        "login_button": "Login",
+        "dont_have_account": "Don't have an account?",
+        "login_header": "Log in to your account",
+        "login_subheader": "Enter your email and password below to log in",
+        "invalid_credentials": "Invalid username or password.",
+        "account_locked": "Your account is locked. Please contact support."
     }
 }

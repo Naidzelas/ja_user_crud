@@ -33,5 +33,20 @@
         "birth_date": "Gimimo data",
         "new_employee": "Naujas darbuotojas",
         "update_employee_information": "Atnaujinti darbuotojo informaciją."
+    },
+    "login": {
+        "login": "Prisijungti",
+        "sign_up": "Registruotis",
+        "username": "Vartotojo vardas",
+        "email_address": "El. pašto adresas",
+        "password": "Slaptažodis",
+        "remember_me": "Prisiminti mane",
+        "forgot_password": "Pamiršote slaptažodį?",
+        "login_button": "Prisijungti",
+        "dont_have_account": "Neturite paskyros?",
+        "login_header": "Prisijunkite prie savo paskyros",
+        "login_subheader": "Įveskite savo el. paštą ir slaptažodį žemiau, kad prisijungtumėte",
+        "invalid_credentials": "Neteisingas vartotojo vardas arba slaptažodis.",
+        "account_locked": "Jūsų paskyra užblokuota. Prašome susisiekti su palaikymo komanda."
     }
 }
