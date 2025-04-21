@@ -29,7 +29,7 @@ class EmployeeController extends Controller
             'email' => 'required|string|email|max:255|unique:employees',
             'phone' => 'required|string|max:255',
             'birth_date' => 'required|date',
-            'role_id' => 'array',
+            'role' => 'required',
         ]);
 
         Employee::firstOrCreate(
@@ -42,7 +42,7 @@ class EmployeeController extends Controller
                 'birth_date' => Carbon::parse($request->birth_date, 'UTC')
                     ->setTimezone('Europe/Vilnius')
                     ->format('Y-m-d'),
-                'role_id' => $request->role_id->id,
+                'role_id' => $request->role['id'],
             ]
         );
 
@@ -57,7 +57,7 @@ class EmployeeController extends Controller
             'email' => 'required|string|email|max:255|unique:employees,email,' . $request->id,
             'phone' => 'required|string|max:255',
             'birth_date' => 'required|date',
-            'role_id' => 'array',
+            'role' => 'required',
         ]);
 
         Employee::where('id', $employeeId)->update([
@@ -68,7 +68,7 @@ class EmployeeController extends Controller
             'birth_date' => Carbon::parse($request->birth_date, 'UTC')
                 ->setTimezone('Europe/Vilnius')
                 ->format('Y-m-d'),
-            'role_id' => $request->role_id->id,
+            'role_id' => $request->role->id,
         ]);
 
         return to_route('employee.index');

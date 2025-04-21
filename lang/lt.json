@@ -32,7 +32,8 @@
         "email": "El. paštas",
         "birth_date": "Gimimo data",
         "new_employee": "Naujas darbuotojas",
-        "update_employee_information": "Atnaujinti darbuotojo informaciją."
+        "update_employee_information": "Atnaujinti darbuotojo informaciją.",
+        "select_role": "Pasirinkite pareigas"
     },
     "login": {
         "login": "Prisijungti",

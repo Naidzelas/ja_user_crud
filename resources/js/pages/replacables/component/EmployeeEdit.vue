@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { router, usePage } from '@inertiajs/vue3';
 import { Button, DatePicker, Dialog, Image, InputGroup, InputGroupAddon, InputMask, Select } from 'primevue';
-import { computed, reactive, ref, watch, inject } from 'vue';
+import { computed, inject, reactive, ref, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 const pageVariables = defineProps({
     edit: Boolean,
@@ -13,7 +13,7 @@ const emit = defineEmits(['update:edit', 'update:employee']);
 const editVisible = ref(pageVariables.edit);
 const page = usePage();
 const er = computed(() => page.props.errors);
-let roles:any = inject('roles');
+let roles: any = inject('roles');
 
 let form = reactive({
     first_name: pageVariables.employee?.first_name,
@@ -23,6 +23,7 @@ let form = reactive({
     email: pageVariables.employee?.email,
     birth_date: pageVariables.employee?.birth_date,
 });
+let newRole = ref();
 
 watch(
     () => pageVariables.edit,
@@ -51,7 +52,9 @@ watch(editVisible, (newVal) => {
     emit('update:edit', newVal);
 });
 
-function createEmployee() {
+function updateEmployee() {
+    let formData = form
+    console.log(formData);
     router.patch(route('employee.update', pageVariables.employee?.id), form, {
         onSuccess: () => {
             editVisible.value = false;
@@ -66,7 +69,7 @@ function createEmployee() {
     <form class="flex">
         <Dialog v-model:visible="editVisible" modal class="w-[40em]">
             <template #header>
-                <div class="flex flex-col gap-4">
+                <div class="flex flex-col gap-4 mb-10">
                     <div class="flex">
                         <Image src="/images/random_person.png" alt="Employee Image" class="mr-4 rounded-full" preview>
                             <template #previewicon>
@@ -76,7 +79,10 @@ function createEmployee() {
                                 <img src="/images/random_person.png" alt="Employee Image" class="rounded-full w-12 h-12" />
                             </template>
                         </Image>
-                        <h2 class="font-bold text-3xl">{{ employee?.first_name }} {{ employee?.last_name }}</h2>
+                        <div class="flex flex-col gap-2">
+                            <h2 class="font-bold text-3xl">{{ employee?.first_name }} {{ employee?.last_name }}</h2>
+                            <p class="-mt-2 text-gray-600">{{ employee?.role.name }}</p>
+                        </div>
                     </div>
                     <p class="text-gray-600">{{ t('employee_register.update_employee_information') }}</p>
                 </div>
@@ -91,7 +97,24 @@ function createEmployee() {
                 <p v-if="er.last_name" class="-mt-3 font-bold text-red-600 text-sm">{{ er.last_name }}</p>
 
                 <label for="role">{{ t('employee_register.role') }}</label>
-                <Select id="role" v-model="form.role" :options="roles" optionLabel="name" :placeholder="t('employee_register.select_role')" class="w-full" />
+                <Select
+                    id="role"
+                    v-model="form.role"
+                    :options="roles"
+                    optionLabel="name"
+                    :placeholder="t('employee_register.select_role')"
+                    class="w-full"
+                    @change="(e) => newRole = e.value.id"
+                >
+                    <template #value="slotProps">
+                        <div v-if="slotProps.value" class="flex items-center">
+                            <div>{{ slotProps.value.name }}</div>
+                        </div>
+                        <span v-else>
+                            {{ slotProps.placeholder }}
+                        </span>
+                    </template>
+                </Select>
                 <p v-if="er.role" class="-mt-3 font-bold text-red-600 text-sm">{{ er.role }}</p>
 
                 <label for="email">{{ t('employee_register.email') }}</label>
@@ -119,7 +142,7 @@ function createEmployee() {
             </div>
             <template #footer>
                 <div class="flex justify-between">
-                    <Button :label="t('general.save')" severity="contrast" @click="createEmployee" autofocus />
+                    <Button :label="t('general.save')" severity="contrast" @click="updateEmployee" autofocus />
                     <Button :label="t('general.cancel')" outlined text severity="secondary" @click="editVisible = false" autofocus />
                 </div>
             </template>
