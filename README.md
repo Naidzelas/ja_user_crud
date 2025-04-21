@@ -12,3 +12,7 @@ DB_DATABASE='something'
 DB_USERNAME=someusername
 DB_PASSWORD=somepassword
 ```
+
+
+https://github.com/user-attachments/assets/904ad853-d1a5-486f-85a3-96aa206146d2
+
