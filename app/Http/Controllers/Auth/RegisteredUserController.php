@@ -47,12 +47,9 @@ class RegisteredUserController extends Controller
         event(new Registered($user));
 
         Auth::login($user);
-
+        
         if(Employee::count() === 0) {
-            Employee::factory()->count(15)->create()->each(function ($employee) {
-                $employee->update(['role_id' => rand(1, 3)]);
-            });
-            // Artisan::call('db:seed');
+            Artisan::call('db:seed');
         }
 
         return to_route('dashboard');
