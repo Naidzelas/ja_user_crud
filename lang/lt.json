@@ -24,7 +24,7 @@
         "manage_employees": "Tvarkyti darbuotojus",
         "loading_empoyee_data": "Įkeliami darbuotojų duomenys. Prašome palaukti.",
         "first_name": "Vardas",
-        "employment": "Darbo santykiai",
+        "employment": "Darbo santykius",
         "last_name": "Pavardė",
         "terminate": "Nutraukti",
         "role": "Pareigos",
@@ -33,7 +33,11 @@
         "birth_date": "Gimimo data",
         "new_employee": "Naujas darbuotojas",
         "update_employee_information": "Atnaujinti darbuotojo informaciją.",
-        "select_role": "Pasirinkite pareigas"
+        "select_role": "Pasirinkite pareigas",
+        "number_example": "Darbuotojų skaičius (pavyzdys)",
+        "employees": "Darbuotojai",
+        "stat_example": "Statusas (pavyzdys)",
+        "total_employees_current": "Viso darbuotojų:"
     },
     "login": {
         "login": "Prisijungti",
@@ -48,6 +52,7 @@
         "login_header": "Prisijunkite prie savo paskyros",
         "login_subheader": "Įveskite savo el. paštą ir slaptažodį žemiau, kad prisijungtumėte",
         "invalid_credentials": "Neteisingas vartotojo vardas arba slaptažodis.",
-        "account_locked": "Jūsų paskyra užblokuota. Prašome susisiekti su palaikymo komanda."
+        "account_locked": "Jūsų paskyra užblokuota. Prašome susisiekti su palaikymo komanda.",
+        "confirm": "patvirtinimui"
     }
 }

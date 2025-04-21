@@ -13,8 +13,8 @@ class EmployeeSeeder extends Seeder
      */
     public function run(): void
     {
-        Employee::factory()->count(10)->create([
-                'role_id' => rand(1, 3),
-        ]);
+        Employee::factory()->count(10)->create()->each(function ($employee) {
+            $employee->update(['role_id' => rand(1, 3)]);
+        });
     }
 }

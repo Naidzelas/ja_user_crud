@@ -7,6 +7,9 @@ import { Label } from '@/components/ui/label';
 import AuthBase from '@/layouts/AuthLayout.vue';
 import { Head, useForm } from '@inertiajs/vue3';
 import { LoaderCircle } from 'lucide-vue-next';
+import { useI18n } from 'vue-i18n';
+
+const { t } = useI18n();
 
 const form = useForm({
     name: '',
@@ -23,25 +26,25 @@ const submit = () => {
 </script>
 
 <template>
-    <AuthBase title="Create an account" description="Enter your details below to create your account">
-        <Head title="Register" />
+    <AuthBase :title="t('login.sign_up')" :description="t('login.login_subheader')">
+        <Head :title="t('login.sign_up')" />
 
         <form @submit.prevent="submit" class="flex flex-col gap-6">
-            <div class="grid gap-6">
-                <div class="grid gap-2">
-                    <Label for="name">Name</Label>
-                    <Input id="name" type="text" required autofocus :tabindex="1" autocomplete="name" v-model="form.name" placeholder="Full name" />
+            <div class="gap-6 grid">
+                <div class="gap-2 grid">
+                    <Label for="name">{{ t('login.username') }}</Label>
+                    <Input id="name" type="text" required autofocus :tabindex="1" autocomplete="name" v-model="form.name" :placeholder="t('login.username')" />
                     <InputError :message="form.errors.name" />
                 </div>
 
-                <div class="grid gap-2">
-                    <Label for="email">Email address</Label>
-                    <Input id="email" type="email" required :tabindex="2" autocomplete="email" v-model="form.email" placeholder="email@example.com" />
+                <div class="gap-2 grid">
+                    <Label for="email">{{ t('login.email_address') }}</Label>
+                    <Input id="email" type="email" required :tabindex="2" autocomplete="email" v-model="form.email" :placeholder="t('login.email_address')" />
                     <InputError :message="form.errors.email" />
                 </div>
 
-                <div class="grid gap-2">
-                    <Label for="password">Password</Label>
+                <div class="gap-2 grid">
+                    <Label for="password">{{ t('login.password') }}</Label>
                     <Input
                         id="password"
                         type="password"
@@ -49,13 +52,13 @@ const submit = () => {
                         :tabindex="3"
                         autocomplete="new-password"
                         v-model="form.password"
-                        placeholder="Password"
+                        :placeholder="t('login.password')"
                     />
                     <InputError :message="form.errors.password" />
                 </div>
 
-                <div class="grid gap-2">
-                    <Label for="password_confirmation">Confirm password</Label>
+                <div class="gap-2 grid">
+                    <Label for="password_confirmation">{{ t('login.password') }} {{ t('login.confirm') }}</Label>
                     <Input
                         id="password_confirmation"
                         type="password"
@@ -63,20 +66,20 @@ const submit = () => {
                         :tabindex="4"
                         autocomplete="new-password"
                         v-model="form.password_confirmation"
-                        placeholder="Confirm password"
+                        :placeholder="t('login.password') + ' ' + t('login.confirm')"
                     />
                     <InputError :message="form.errors.password_confirmation" />
                 </div>
 
                 <Button type="submit" class="mt-2 w-full" tabindex="5" :disabled="form.processing">
-                    <LoaderCircle v-if="form.processing" class="h-4 w-4 animate-spin" />
-                    Create account
+                    <LoaderCircle v-if="form.processing" class="w-4 h-4 animate-spin" />
+                    {{ t('login.sign_up') }}
                 </Button>
             </div>
 
-            <div class="text-center text-sm text-muted-foreground">
-                Already have an account?
-                <TextLink :href="route('login')" class="underline underline-offset-4" :tabindex="6">Log in</TextLink>
+            <div class="text-muted-foreground text-sm text-center">
+                {{ t('login.dont_have_account') }}
+                <TextLink :href="route('login')" class="underline underline-offset-4" :tabindex="6">{{ t('login.login') }}</TextLink>
             </div>
         </form>
     </AuthBase>

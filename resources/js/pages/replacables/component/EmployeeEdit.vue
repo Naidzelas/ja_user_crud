@@ -142,8 +142,8 @@ function updateEmployee() {
             </div>
             <template #footer>
                 <div class="flex justify-between">
-                    <Button :label="t('general.save')" severity="contrast" @click="updateEmployee" autofocus />
-                    <Button :label="t('general.cancel')" outlined text severity="secondary" @click="editVisible = false" autofocus />
+                    <Button :label="t('general.save')" icon="pi pi-check" severity="contrast" @click="updateEmployee" autofocus />
+                    <Button :label="t('general.cancel')" icon="pi pi-times" outlined text severity="secondary" @click="editVisible = false" autofocus />
                 </div>
             </template>
         </Dialog>

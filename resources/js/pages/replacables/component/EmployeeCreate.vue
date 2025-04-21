@@ -92,8 +92,8 @@ function createEmployee() {
             </div>
             <template #footer>
                 <div class="flex justify-between mt-8">
-                    <Button :label="t('general.save')" severity="contrast" @click="createEmployee" autofocus />
-                    <Button :label="t('general.cancel')" outlined text severity="secondary" @click="visible = false" autofocus />
+                    <Button :label="t('general.save')" icon="pi pi-check" severity="contrast" @click="createEmployee" autofocus />
+                    <Button :label="t('general.cancel')" icon="pi pi-times" outlined text severity="secondary" @click="visible = false" autofocus />
                 </div>
             </template>
         </Dialog>

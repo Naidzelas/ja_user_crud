@@ -33,6 +33,10 @@
         "email": "Email",
         "birth_date": "Birth Date",
         "new_employee": "New Employee",
+        "number_example": "Employee Number (example)",
+        "employees": "Employees",
+        "stat_example": "Status (example)",
+        "total_employees_current": "Total Employees:",
         "update_employee_information": "Update Employee Information."
     },
     "login": {
@@ -48,6 +52,7 @@
         "login_header": "Log in to your account",
         "login_subheader": "Enter your email and password below to log in",
         "invalid_credentials": "Invalid username or password.",
-        "account_locked": "Your account is locked. Please contact support."
+        "account_locked": "Your account is locked. Please contact support.",
+        "confirm": "confirm"
     }
 }

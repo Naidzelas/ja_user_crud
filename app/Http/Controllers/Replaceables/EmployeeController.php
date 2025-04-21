@@ -59,7 +59,7 @@ class EmployeeController extends Controller
             'birth_date' => 'required|date',
             'role' => 'required',
         ]);
-
+        
         Employee::where('id', $employeeId)->update([
             'first_name' => $request->first_name,
             'last_name' => $request->last_name,
@@ -68,7 +68,7 @@ class EmployeeController extends Controller
             'birth_date' => Carbon::parse($request->birth_date, 'UTC')
                 ->setTimezone('Europe/Vilnius')
                 ->format('Y-m-d'),
-            'role_id' => $request->role->id,
+            'role_id' => $request->role['id'],
         ]);
 
         return to_route('employee.index');
